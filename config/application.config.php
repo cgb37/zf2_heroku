@@ -8,9 +8,8 @@
 return array(
     'modules' => array(
         'Application',
-        'DoctrineModule',
-        'DoctrineORMModule',
         'Album',
+        'Calculator',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
