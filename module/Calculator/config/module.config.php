@@ -28,6 +28,19 @@ return array(
             ),
         ),
     ),
+    'service_manager' => array(
+        'abstract_factories' => array(
+            'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
+            'Zend\Log\LoggerAbstractServiceFactory',
+        ),
+        'factories' => array(
+            'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+
+        ),
+        'invokables' => array(
+            'PaydateCalculator' => 'Calculator\Model\PaydateCalculator'
+        ),
+    ),
 
     'view_manager' => array(
         'template_path_stack' => array(
