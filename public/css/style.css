@@ -359,3 +359,24 @@ div.container a.brand {
 .panel-danger>.panel-footer+.panel-collapse>.panel-body {
     border-bottom-color: #ebccd1;
 }
+
+
+
+
+.fc-center h2 {
+    color:#ffffff;
+    font-size:1em;
+}
+
+
+.calendar-wrap {
+    display: block;
+    position: relative;
+    padding: 20px;
+    background-color: #337ab7;
+}
+
+.calendar-wrap h4 {
+    text-align: center;
+    color: #ffffff;
+}

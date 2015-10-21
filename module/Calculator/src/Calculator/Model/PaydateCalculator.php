@@ -56,7 +56,7 @@ class PaydateCalculator
         //$this->setFundDay("2015-10-19");
         $this->setTimezone("America/New_York");
         $this->setHolidays($this->_holidays, null);
-        $this->setDirectDeposit("No");
+        $this->setDirectDeposit("yes");
         $this->setPaySpan("weekly"); // weekly, bi-weekly, monthly
     }
 
@@ -204,7 +204,7 @@ class PaydateCalculator
 
                             } else {
 
-                                return $due_date;
+                                return "Not DD ". $due_date;
 
                             }
 
@@ -212,7 +212,7 @@ class PaydateCalculator
 
                     } else {
 
-                        return $due_date;
+                        return "not dd " . $due_date;
 
                     }
 
@@ -364,10 +364,10 @@ class PaydateCalculator
         $option = strtolower($option);
         switch($option) {
 
-            case 'No':
+            case 'no':
                 $direct_deposit = false;
                 break;
-            case 'Yes':
+            case 'yes':
                 $direct_deposit = true;
                 break;
             default:

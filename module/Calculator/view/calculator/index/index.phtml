@@ -1,51 +1,61 @@
 
 <div class="container">
+    <div class="row">
+        <h2>Payee Details</h2>
+    </div>
 
     <div class="row">
 
         <div class="col-lg-8">
+            <?php
 
-            <h2>Payee Details</h2>
+            echo $this->form()->openTag($form);
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('fund_date_input'));
+            echo '</div>';
 
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="fund_date_input">Fund Date: </label>
-                    <input class="form-control" type="date" id="fund_date_input">
-                </div>
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('pay_span'));
+            echo '</div>';
 
-                <div class="form-group">
-                    <label for="pay_span_input">Pay Span: </label><br>
-                    <select class="form-control" id="pay_span_input">
-                        <option value="weekly">Weekly</option>
-                        <option value="bi-weekly">Bi-weekly</option>
-                        <option value="monthly">Monthly</option>
-                    </select>
-                </div>
+            echo '<div class="form-group">';
+            echo $this->formRow($form->get('direct_deposit'));
+            echo '</div>';
 
-                <div class="form-group">
-                    <label for="direct_deposit_input">Direct Deposit: </label><br>
-                    <select class="form-control" id="direct_deposit_input">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
+            echo '<div class="form-group">';
+            echo $this->formSubmit($form->get('due_date_submit'));
+            echo '</div>';
 
-                <div class="form-group">
-                    <label for="first_due_date_submit">Get First Due Date</label>
-                    <input type="button" class="form-control" id="first_due_date_submit" value="Calculate Due Date">
-                </div>
-            </form>
+            echo $this->form()->closeTag();
+
+            ?>
+
 
         </div> <!-- end col -->
 
         <div class="col-lg-4">
+            <p>
+                <b>Due Date Result:</b><br>
+                <div id="due_date_result"><?php echo $this->result; ?></div>
+            </p>
 
-            <div id="due_date_result">2015-07-15</div>
+
 
         </div> <!-- end col -->
 
 
     </div> <!-- end row -->
+
+    <div class="row">
+        <p>request:
+        <?php echo $this->request; ?>
+        </p>
+
+        <p>response:
+        <?php echo $this->response; ?>
+        </p>
+    </div>
+
 
 
 <hr>
@@ -54,7 +64,14 @@
 
         <div class="col-lg-8">
 
-            <div id="calendar"></div>
+            <div class="calendar-wrap">
+
+                <h4>Due Date Calendar</h4>
+
+                <div id="calendar"></div>
+
+            </div>
+
 
         </div> <!-- end col -->
 
@@ -81,9 +98,7 @@
                             <li> 12-25 Christmas Day</li>
                         </ul>
                     </div>
-                    <div class="panel-footer">
-                        <p>Source: <a href="https://www.opm.gov/policy-data-oversight/snow-dismissal-procedures/federal-holidays/" target="_blank">OPM.gov</a> </p>
-                    </div>
+
                 </div>
 
                 <div class="panel panel-primary">
