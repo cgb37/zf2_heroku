@@ -57,7 +57,7 @@ class PaydateCalculator
         $this->setTimezone("America/New_York");
         $this->setHolidays($this->_holidays, null);
         $this->setDirectDeposit("No");
-        $this->setPaySpan("monthly"); // weekly, bi-weekly, monthly
+        $this->setPaySpan("weekly"); // weekly, bi-weekly, monthly
     }
 
 
@@ -65,13 +65,16 @@ class PaydateCalculator
     public function Calculate_Due_Date($fund_day)
     {
 
-        $first_day = date('Y-m-d', strtotime($fund_day. ' + 9 days'));
+        if($this->getPaySpan() == "P1W") {
+            $first_day = date('Y-m-d', strtotime($fund_day. ' + 7 days'));
+        } else {
+            $first_day = date('Y-m-d', strtotime($fund_day));
+        }
 
-        $start = new \DateTime($first_day, $this->getTimezone());
-        $interval = new \DateInterval($this->getPaySpan());
-        //$end = new \DateTime('2015-12-31', $this->getTimezone());
+        $start       = new \DateTime($first_day, $this->getTimezone());
+        $interval    = new \DateInterval($this->getPaySpan());
         $occurrences = 1;
-        $period = new \DatePeriod($start, $interval, $occurrences, \DatePeriod::EXCLUDE_START_DATE);
+        $period      = new \DatePeriod($start, $interval, $occurrences, \DatePeriod::EXCLUDE_START_DATE);
 
         foreach($period as $dt){
             $due_date = $dt->format("Y-m-d");
@@ -89,15 +92,12 @@ class PaydateCalculator
                         $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
                         return " is a saturday - add 2 days: ". $due_date;
 
-                    } elseif($dt->format("N") == 7) {
+                    }
+                    if($dt->format("N") == 7) {
 
                         //sunday - add 1 day
                         $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
                         return " is a sunday - add 1 day: ". $due_date;
-
-                    } else {
-
-                        continue;
 
                     }
 
@@ -119,15 +119,12 @@ class PaydateCalculator
                                 $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
                                 return " is a saturday - add 2 days: ". $due_date;
 
-                            } elseif($dt->format("N") == 7) {
+                            }
+                            if($dt->format("N") == 7) {
 
                                 //sunday - add 1 day
                                 $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
                                 return " is a sunday - add 1 day: ". $due_date;
-
-                            } else {
-
-                                continue;
 
                             }
 
@@ -155,21 +152,17 @@ class PaydateCalculator
                 if($this->isWeekend($due_date)) {
 
                     //is it saturday or sunday
-                    if($dt->format("N") == 5) {
+                    if($dt->format("N") == 6) {
 
                         //saturday - add 2 days
                         $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
                         return " Not DD - is a saturday - add 2 days: ". $due_date;
 
-                    } elseif($dt->format("N") == 6) {
+                    } elseif($dt->format("N") == 7) {
 
                         //sunday - add 1 day
                         $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
                         return "Not DD is a sunday - add 1 day: ". $due_date;
-
-                    } else {
-
-                        continue;
 
                     }
 
@@ -178,37 +171,44 @@ class PaydateCalculator
                     //is it a holiday?
                     if($this->isHoliday(strtotime($due_date)) == true ) {
 
-                        //it is a holiday so subtract a day
-                        $due_date = date('Y-m-d', strtotime($due_date. ' - 1 days'));
+                        //if the holiday falls on a monday subtract 3 days to fall on a friday
+                        if($dt->format("N") == 1) {
 
-                        //is it a weekend?
-                        if($this->isWeekend($due_date)) {
-
-                            //is it saturday or sunday
-                            if($dt->format("N") == 5) {
-
-                                //saturday - add 2 days
-                                $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
-                                return "Not DD is a saturday - add 2 days: ". $due_date;
-
-                            } elseif($dt->format("N") == 6) {
-
-                                //sunday - add 1 day
-                                $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
-                                return "Not DD is a sunday - add 1 day: ". $due_date;
-
-                            } else {
-
-                                continue;
-
-                            }
+                            //fall on a friday before monday holiday
+                            $due_date = date('Y-m-d', strtotime($due_date. ' - 3 days'));
+                            return $due_date;
 
                         } else {
 
-                            return $due_date;
+                            //it is a holiday so subtract a day
+                            $due_date = date('Y-m-d', strtotime($due_date. ' - 1 days'));
+
+                            //is it a weekend?
+                            if($this->isWeekend($due_date)) {
+
+                                //is it saturday or sunday
+                                if($dt->format("N") == 6) {
+
+                                    //saturday - add 2 days
+                                    $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
+                                    return "Not DD is a saturday - add 2 days: ". $due_date;
+
+                                }
+                                if($dt->format("N") == 7) {
+
+                                    //sunday - add 1 day
+                                    $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
+                                    return "Not DD is a sunday - add 1 day: ". $due_date;
+
+                                }
+
+                            } else {
+
+                                return $due_date;
+
+                            }
 
                         }
-
 
                     } else {
 
@@ -217,8 +217,6 @@ class PaydateCalculator
                     }
 
                 }
-
-
 
             }
 
@@ -328,7 +326,7 @@ class PaydateCalculator
     }
 
     /**
-     * @param mixed $pay_span
+     * @param mixed $span
      */
     public function setPaySpan($span)
     {
@@ -358,8 +356,9 @@ class PaydateCalculator
     }
 
     /**
-     * @param mixed $direct_deposit
+     * @param mixed $option
      */
+
     public function setDirectDeposit($option)
     {
         $option = strtolower($option);
