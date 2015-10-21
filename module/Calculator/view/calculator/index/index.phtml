@@ -1,1 +1,95 @@
-Action "index", controller "Index", module "Calculator".
+
+<div class="container">
+
+    <div class="row">
+
+        <h2>Payee Details</h2>
+
+        <form class="form-inline">
+
+            <div class="form-group">
+                <label for="fund_date_input">Fund Date: </label>
+                <input class="form-control" type="date" id="fund_date_input">
+            </div>
+
+
+            <div class="form-group">
+                <label for="pay_span_input">Pay Span: </label><br>
+                <select class="form-control" id="pay_span_input">
+                    <option value="weekly">Weekly</option>
+                    <option value="bi-weekly">Bi-weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+                <label for="direct_deposit_input">Direct Deposit: </label><br>
+                <select class="form-control" id="direct_deposit_input">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="first_due_date_submit">Get First Due Date</label>
+                <input type="button" class="form-control" id="first_due_date_submit" value="Calculate Due Date">
+
+            </div>
+
+
+
+        </form>
+
+
+    </div> <!-- end row -->
+
+
+
+
+    <div class="row">
+
+        <div class="col-lg-8">
+
+            <div id="calendar"></div>
+
+        </div> <!-- end col -->
+
+
+        <div class="col-lg-4">
+
+            <h3>Holidays</h3>
+            <ul class="list-unstyled">
+                <li> 01-01 New Year’s Day</li>
+                <li> 01-19 Martin Luther King, Jr.'s Birthday</li>
+                <li> 02-16 Washington’s Birthday</li>
+                <li> 05-25 Memorial Day</li>
+                <li> 07-03 Independence Day</li>
+                <li> 09-07 Labor Day</li>
+                <li> 10-12 Columbus Day</li>
+                <li> 11-11 Veterans Day</li>
+                <li> 11-26 Thanksgiving Day</li>
+                <li> 12-25 Christmas Day</li>
+            </ul>
+            <p>Source: <a href="https://www.opm.gov/policy-data-oversight/snow-dismissal-procedures/federal-holidays/" target="_blank">OPM.gov</a> </p>
+
+
+            <h4>Due Date Criteria</h4>
+            <p>This function determines the first available due date following the funding of a loan.</p>
+            <p>The paydate will be at least 10 days in the future from the fund_day.</p>
+            <p>The due_date will fall on a day that is a paydate based on the paydate model which is specified by pay_span unless
+                the date must be adjusted forward to miss a weekend or backward to miss a holiday</p>
+            <p>Holiday adjustment takes precedence over Weekend.</p>
+
+
+        </div> <!-- end col -->
+
+
+
+
+
+    </div> <!-- end row -->
+
+</div> <!-- end container -->
