@@ -12,49 +12,14 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        defaultDate: '2014-06-12',
         defaultView: 'month',
         editable: true,
         events: [
-            {
-                title: 'All Day Event',
-                start: '2014-06-01'
-            },
-            {
-                title: 'Long Event',
-                start: '2014-06-07',
-                end: '2014-06-10'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2014-06-09T16:00:00'
-            },
-            {
-                id: 999,
-                title: 'Repeating Event',
-                start: '2014-06-16T16:00:00'
-            },
-            {
-                title: 'Meeting',
-                start: '2014-06-12T10:30:00',
-                end: '2014-06-12T12:30:00'
-            },
-            {
-                title: 'Lunch',
-                start: '2014-06-12T12:00:00'
-            },
-            {
-                title: 'Birthday Party',
-                start: '2014-06-13T07:00:00'
-            },
-            {
-                title: 'Click for Google',
-                url: 'http://google.com/',
-                start: '2014-06-28'
-            }
+            {"title":"weekend","start":"2015-01-25"},{"title":"weekend","start":"2015-02-08"},{"title":"weekend","start":"2015-02-22"},{"title":"weekend","start":"2015-03-08"},{"title":"weekend","start":"2015-03-22"},{"title":"weekend","start":"2015-04-05"},{"title":"weekend","start":"2015-04-19"},{"title":"weekend","start":"2015-05-03"},{"title":"weekend","start":"2015-05-17"},{"title":"weekend","start":"2015-05-31"},{"title":"weekend","start":"2015-06-14"},{"title":"weekend","start":"2015-06-28"},{"title":"weekend","start":"2015-07-12"},{"title":"weekend","start":"2015-07-26"},{"title":"weekend","start":"2015-08-09"},{"title":"weekend","start":"2015-08-23"},{"title":"weekend","start":"2015-09-06"},{"title":"weekend","start":"2015-09-20"},{"title":"weekend","start":"2015-10-04"},{"title":"weekend","start":"2015-10-18"},{"title":"weekend","start":"2015-11-01"},{"title":"weekend","start":"2015-11-15"},{"title":"weekend","start":"2015-11-29"},{"title":"weekend","start":"2015-12-13"},{"title":"weekend","start":"2015-12-27"}
         ]
     });
+
+    $('#calendar').fullCalendar('gotoDate', currentDate);
 
 
 });
