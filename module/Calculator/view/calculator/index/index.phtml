@@ -3,45 +3,46 @@
 
     <div class="row">
 
-        <h2>Payee Details</h2>
+        <div class="col-lg-8">
 
-        <form class="form-inline">
+            <h2>Payee Details</h2>
 
-            <div class="form-group">
-                <label for="fund_date_input">Fund Date: </label>
-                <input class="form-control" type="date" id="fund_date_input">
-            </div>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="fund_date_input">Fund Date: </label>
+                    <input class="form-control" type="date" id="fund_date_input">
+                </div>
 
+                <div class="form-group">
+                    <label for="pay_span_input">Pay Span: </label><br>
+                    <select class="form-control" id="pay_span_input">
+                        <option value="weekly">Weekly</option>
+                        <option value="bi-weekly">Bi-weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="pay_span_input">Pay Span: </label><br>
-                <select class="form-control" id="pay_span_input">
-                    <option value="weekly">Weekly</option>
-                    <option value="bi-weekly">Bi-weekly</option>
-                    <option value="monthly">Monthly</option>
-                </select>
+                <div class="form-group">
+                    <label for="direct_deposit_input">Direct Deposit: </label><br>
+                    <select class="form-control" id="direct_deposit_input">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <label for="first_due_date_submit">Get First Due Date</label>
+                    <input type="button" class="form-control" id="first_due_date_submit" value="Calculate Due Date">
+                </div>
+            </form>
 
+        </div> <!-- end col -->
 
-            <div class="form-group">
-                <label for="direct_deposit_input">Direct Deposit: </label><br>
-                <select class="form-control" id="direct_deposit_input">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+        <div class="col-lg-4">
 
-            </div>
+            <div id="due_date_result"></div>
 
-            <div class="form-group">
-                <label for="first_due_date_submit">Get First Due Date</label>
-                <input type="button" class="form-control" id="first_due_date_submit" value="Calculate Due Date">
-
-            </div>
-
-
-
-        </form>
+        </div> <!-- end col -->
 
 
     </div> <!-- end row -->
