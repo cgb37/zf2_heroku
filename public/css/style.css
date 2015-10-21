@@ -48,6 +48,7 @@ div.container a.brand {
 
 .panel-body {
     padding: 15px;
+    min-height: 180px;
 }
 
 .panel-heading {
