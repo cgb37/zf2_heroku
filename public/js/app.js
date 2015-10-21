@@ -28,7 +28,7 @@ $(document).ready(function() {
     $('#first_due_date_submit').on('click', function() {
 
         $('#calendar').fullCalendar('gotoDate', moment(due_date_result));
-        
+
     })
 
 });
