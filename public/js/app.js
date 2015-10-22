@@ -25,7 +25,29 @@ $(document).ready(function() {
     });
 
 
-    $('#first_due_date_submit').on('click', function() {
+    $('#first_due_date_submit').on('click', function(event) {
+
+        event.preventDefault();
+        var $due_date = $(this);
+
+        $.get("calculator/calculate", null,
+            function(data){
+                if(data.response == true){
+
+                    $("#due_date_result").empty();
+
+                    // print success message
+                    $("#due_date_result").append("<p>Your next due date is: </p>");
+                } else {
+                    // print error message
+                    console.log('could not calculate due date');
+                }
+            }, 'json');
+
+
+
+
+
 
         $('#calendar').fullCalendar('gotoDate', moment(due_date_result));
 
