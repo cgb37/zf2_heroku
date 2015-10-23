@@ -32,7 +32,7 @@ class PaydateCalculator
     protected $_holidays = array("01-01", "19-01", "16-02", "25-05", "03-07", "07-09", "12-10", "11-11", "26-11", "25-12");
     protected $_pay_span;
     protected $_direct_deposit;
-    public $due_date;
+    public    $due_date;
 
     /**
      * Federal Holidays
@@ -50,14 +50,11 @@ class PaydateCalculator
      * 12-25 Christmas Day
      */
 
-
+    //TODO: get year from input value if not current year
     public function __construct()
     {
-        //$this->setFundDay("2015-10-19");
         $this->setTimezone("America/New_York");
         $this->setHolidays($this->_holidays, null);
-        //$this->setDirectDeposit("yes");
-        //$this->setPaySpan("weekly"); // weekly, bi-weekly, monthly
     }
 
     //Calculate_Due_Date($fund_day, $holiday_array, $pay_span, $pay_day, $direct_deposit)
