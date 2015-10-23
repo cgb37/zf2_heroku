@@ -3,7 +3,12 @@
  */
 $(document).ready(function() {
 
-    var due_date_result = $('#due_date_result').text();
+
+
+    if($('#due_date_result').empty()) {
+        var title = "Today";
+        var due_date_result = moment();
+    }
 
 
     // page is now ready, initialize the calendar...
@@ -15,14 +20,16 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        theme: true,
         defaultView: 'month',
         events: [
             {
-                title  : 'Due Date',
-                start  : due_date_result
+                'title': title,
+                'start': due_date_result
             }
         ]
     });
+
 
 
     $('#first_due_date_submit').on('click', function(event) {
@@ -30,27 +37,42 @@ $(document).ready(function() {
         event.preventDefault();
         var $due_date = $(this);
 
-        $.get("calculator/calculate", null,
+        var fund_date_input =  $("#fund_date_input").val();  //'2015-02-12';
+        console.log(fund_date_input);
+
+        var pay_span = $("#pay_span_input").val();
+        console.log($("#pay_span_input").val());
+
+        var direct_deposit = $("#direct_deposit_input").val();
+        console.log(direct_deposit)
+
+        $.get("calculate?fund_date_input=" + fund_date_input + "&pay_span=" + pay_span + "&direct_deposit=" + direct_deposit, null,
             function(data){
                 if(data.response == true){
 
                     $("#due_date_result").empty();
+                    console.log(data.due_date);
 
                     // print success message
-                    $("#due_date_result").append("<p>Your next due date is: </p>");
+                    $("#due_date_result").append(
+                        "<p>Your next due date is: " + data.due_date + "<br>" +
+                        "Timestamp: " + data.due_date_timestamp + "</p>"
+                    );
+
+                    $('#calendar').fullCalendar('gotoDate', data.due_date);
+
+
                 } else {
                     // print error message
                     console.log('could not calculate due date');
+                    $("#due_date_result").append("<p>Could not calculate due date</p>");
                 }
             }, 'json');
 
 
 
+    });
 
 
-
-        $('#calendar').fullCalendar('gotoDate', moment(due_date_result));
-
-    })
 
 });
