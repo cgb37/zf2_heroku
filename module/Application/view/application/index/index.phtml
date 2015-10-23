@@ -1,14 +1,17 @@
-<div class="jumbotron">
-    <h1>Pay Date Calculator</h1>
-    <p><?php echo sprintf($this->translate('A Pay Date Calculator developed using Zend Framework version %s.'),  \Zend\Version\Version::VERSION) ?>
-     It determines the first available due date following the funding of a loan.
-        The paydate will be at least 10 days in the future from the fund day.
-        The due date will fall on a day that is a paydate based on the paydate model which is specified by the pay
-        span unless the date must be adjusted forward to miss a weekend or backward to miss a holiday.
-        Holiday adjustment takes precedence over Weekend.
-    </p>
-    <p><a class="btn btn-primary btn-lg" href="/calculator/index" ><?php echo $this->translate('Calculate Due Date') ?> &raquo;</a></p>
+<div class="jumbtron-wrapper">
+    <div class="jumbotron">
+        <h1>Pay Date Calculator</h1>
+        <p><?php echo sprintf($this->translate('A Pay Date Calculator developed using Zend Framework version %s.'),  \Zend\Version\Version::VERSION) ?>
+            It determines the first available due date following the funding of a loan.
+            The paydate will be at least 10 days in the future from the fund day.
+            The due date will fall on a day that is a paydate based on the paydate model which is specified by the pay
+            span unless the date must be adjusted forward to miss a weekend or backward to miss a holiday.
+            Holiday adjustment takes precedence over Weekend.
+        </p>
+        <p><a class="btn btn-primary btn-lg" href="/calculator/index" ><?php echo $this->translate('Calculate Due Date') ?> &raquo;</a></p>
+    </div>
 </div>
+
 
    <div class="row">
         <div class="col-md-4">
