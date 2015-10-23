@@ -108,31 +108,42 @@ class PaydateCalculator
                 //is it a holiday?
                 if($this->isHoliday(strtotime($due_date)) == true ) {
 
-                    //it is a holiday so subtract a day
-                    $due_date = date('Y-m-d', strtotime($due_date. ' - 1 days'));
+                    //if the holiday falls on a monday subtract 3 days to fall on a friday
+                    if($dt->format("N") == 1) {
 
-                    //is it a weekend?
-                    if($this->isWeekend($due_date)) {
-
-                        //is it saturday or sunday
-                        if($dt->format("N") == 6) {
-
-                            //saturday - add 2 days
-                            $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
-                            return $due_date;
-
-                        }
-                        if($dt->format("N") == 7) {
-
-                            //sunday - add 1 day
-                            $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
-                            return $due_date;
-
-                        }
+                        //fall on a friday before monday holiday
+                        $due_date = date('Y-m-d', strtotime($due_date. ' - 3 days'));
+                        return $due_date;
 
                     } else {
 
-                        return $due_date;
+                        //it is a holiday so subtract a day
+                        $due_date = date('Y-m-d', strtotime($due_date. ' - 1 days'));
+
+                        //is it a weekend?
+                        if($this->isWeekend($due_date)) {
+
+                            //is it saturday or sunday
+                            if($dt->format("N") == 6) {
+
+                                //saturday - add 2 days
+                                $due_date = date('Y-m-d', strtotime($due_date. ' + 2 days'));
+                                return $due_date;
+
+                            }
+                            if($dt->format("N") == 7) {
+
+                                //sunday - add 1 day
+                                $due_date = date('Y-m-d', strtotime($due_date. ' + 1 days'));
+                                return $due_date;
+
+                            }
+
+                        } else {
+
+                            return $due_date;
+
+                        }
 
                     }
 
