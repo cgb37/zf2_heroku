@@ -35,23 +35,22 @@ $(document).ready(function() {
     $('#first_due_date_submit').on('click', function(event) {
 
         event.preventDefault();
-        var $due_date = $(this);
 
         var fund_date_input =  $("#fund_date_input").val();  //'2015-02-12';
-        console.log(fund_date_input);
+        //console.log(fund_date_input);
 
         var pay_span = $("#pay_span_input").val();
-        console.log($("#pay_span_input").val());
+        //console.log($("#pay_span_input").val());
 
         var direct_deposit = $("#direct_deposit_input").val();
-        console.log(direct_deposit)
+        //console.log(direct_deposit)
 
         $.get("calculate?fund_date_input=" + fund_date_input + "&pay_span=" + pay_span + "&direct_deposit=" + direct_deposit, null,
             function(data){
                 if(data.response == true){
 
                     $("#due_date_result").empty();
-                    console.log(data.due_date);
+                    //console.log(data.due_date);
 
                     // print success message
                     $("#due_date_result").append(
@@ -64,7 +63,7 @@ $(document).ready(function() {
 
                 } else {
                     // print error message
-                    console.log('could not calculate due date');
+                    //console.log('could not calculate due date');
                     $("#due_date_result").append("<p>Could not calculate due date</p>");
                 }
             }, 'json');
