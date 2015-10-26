@@ -70,7 +70,7 @@ class PaydateCalculator
         //is direct deposit?,
         if($this->getDirectDeposit() == false) {
             // not direct deposit - add a day
-            $first_day = date('Y-m-d', strtotime($fund_day. ' + 1 days'));
+            $first_day = date('Y-m-d', strtotime($first_day. ' + 1 days'));
         }
 
         $start       = new \DateTime($first_day, $this->getTimezone());
